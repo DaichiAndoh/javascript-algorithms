@@ -35,13 +35,128 @@ class DoublyLinkedList{
     }
     console.log(dataListStr);
   }
+
+  printInReverse(){
+    let iterator = this.tail;
+    let dataListStr = "";
+    while(iterator != null){
+      dataListStr += iterator.data + ' ';
+      iterator = iterator.prev;
+    }
+    console.log(dataListStr)
+  }
+
+  reverse() {
+    let currentNode = this.head;
+    [this.head, this.tail] = [this.tail, this.head];
+
+    while (currentNode !== null) {
+      const prev = currentNode.prev;
+      currentNode.prev = currentNode.next;
+      currentNode.next = prev;
+      currentNode = currentNode.prev;
+    }
+  }
+
+  at(index) {
+    let currentNode = this.head;
+
+    for (let i = 0; i < index; i++) {
+      currentNode = currentNode.next;
+      if (currentNode === null) return null;
+    }
+
+    return currentNode;
+  }
+
+  findNode(key) {
+    let currentNode = this.head;
+
+    while (currentNode !== null) {
+      if (currentNode.data === key) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return currentNode;
+  }
+
+  preappend(newNode){
+    this.head.prev = newNode;
+    newNode.next = this.head;
+    newNode.prev = null;
+    this.head = newNode;
+  }
+
+  append(newNode){
+    this.tail.next = newNode;
+    newNode.next = null;
+    newNode.prev = this.tail;
+    this.tail = newNode;
+  }
+
+  addNextNode(node, newNode){
+    const tempNode = node.next;
+    node.next = newNode;
+    newNode.next = tempNode;
+    newNode.prev = node;
+
+    if (node === this.tail) this.tail = newNode;
+    else tempNode.prev = newNode;
+  }
+
+  popFront() {
+    this.head = this.head.next;
+    this.head.prev = null;
+  }
+
+  pop() {
+    this.tail = this.tail.prev;
+    this.tail.next = null;
+  }
+
+  deleteNode(node) {
+    if (node === this.tail) return this.pop();
+    if (node === this.head) return this.popFront();
+
+    node.prev.next = node.next;
+    node.next.prev = node.prev;
+  }
 }
 
 
-const numList = new DoublyLinkedList([35, 23, 546, 67, 86, 234, 56, 767, 34, 1, 98, 78, 555]);
+const doublyLinkedList = new DoublyLinkedList([35, 23, 546, 67, 86, 234, 56, 767, 34, 1, 98, 78, 555]);
+ 
+console.log(doublyLinkedList.head.data); // 35
+console.log(doublyLinkedList.head.next.data); // 23
+console.log(doublyLinkedList.tail.data); // 555
+console.log(doublyLinkedList.tail.prev.data); // 78
 
-numList.printList(); // 35 23 546 67 86 234 56 767 34 1 98 78 555
-console.log(numList.head.data); // 35
-console.log(numList.head.next.data); // 23
-console.log(numList.tail.data); // 555
-console.log(numList.tail.prev.data); // 78
+// 反転
+doublyLinkedList.printList(); // 35 23 546 67 86 234 56 767 34 1 98 78 555
+doublyLinkedList.printInReverse(); // 555 78 98 1 34 767 56 234 86 67 546 23 35
+doublyLinkedList.reverse();
+doublyLinkedList.printList(); // 555 78 98 1 34 767 56 234 86 67 546 23 35
+doublyLinkedList.printInReverse(); // 35 23 546 67 86 234 56 767 34 1 98 78 555
+doublyLinkedList.reverse();
+
+// 探索
+console.log(doublyLinkedList.at(3).data); // 67
+console.log(doublyLinkedList.at(13)); // null
+console.log(doublyLinkedList.findNode(67)); // Node { data: 67, prev: Node { data: 546, ... }, next: Node { data: 86, ... } }
+console.log(doublyLinkedList.findNode(14)); // null
+
+// 挿入
+doublyLinkedList.preappend(new Node(12));
+doublyLinkedList.printList(); // 12 35 23 546 67 86 234 56 767 34 1 98 78 555
+doublyLinkedList.append(new Node(99));
+doublyLinkedList.printList(); // 12 35 23 546 67 86 234 56 767 34 1 98 78 555 99
+doublyLinkedList.addNextNode(doublyLinkedList.at(3), new Node(66));
+doublyLinkedList.printList(); // 12 35 23 546 66 67 86 234 56 767 34 1 98 78 555 99
+
+// 削除
+doublyLinkedList.popFront();
+doublyLinkedList.pop();
+doublyLinkedList.deleteNode(doublyLinkedList.at(3));
+doublyLinkedList.printList(); // 35 23 546 67 86 234 56 767 34 1 98 78 555
