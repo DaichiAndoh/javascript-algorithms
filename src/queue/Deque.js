@@ -97,3 +97,36 @@ console.log(deque.dequeueBack()); // 36
 console.log(deque.dequeueFront()); // 20
 console.log(deque.dequeueFront()); // 96
 console.log(deque.dequeueFront()); // null
+
+
+// Sliding Window
+function getMaxWindows(arr, k) {
+  if (k > arr.length) return [];
+
+  const results = [];
+  const deque = [];
+
+  for (let i = 0; i < k; i++) {
+    while (deque.length && arr[deque[deque.length - 1]] <= arr[i]) {
+      deque.pop();
+    }
+    deque.push(i);
+  }
+
+  for (let i = k; i < arr.length; i++) {
+    results.push(arr[deque[0]]);
+    while (deque.length && deque[0] <= i - k) {
+      deque.shift();
+    }
+    while (deque.length && arr[deque[deque.length - 1]] <= arr[i]) {
+      deque.pop();
+    }
+    deque.push(i);
+  }
+
+  results.push(arr[deque[0]]);
+
+  return results;
+}
+
+console.log(getMaxWindows([34,35,64,34,10,2,14,5,353,23,35,63,23], 4)); // [64, 64, 64, 34, 14, 353, 353, 353, 353, 63]
