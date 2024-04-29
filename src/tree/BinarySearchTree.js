@@ -4,11 +4,25 @@ class BinaryTree{
     this.left = left;
     this.right = right;
   }
+
+  printInOrder() {
+    this.inOrderWalk(this);
+    console.log('');
+  }
+
+  inOrderWalk(tRoot) {
+    if (tRoot !== null) {
+      this.inOrderWalk(tRoot.left);
+      process.stdout.write(tRoot.data + ' ');
+      this.inOrderWalk(tRoot.right);
+    }
+  }
 }
 
 class BinarySearchTree {
   constructor(arr) {
-    this.root = BinarySearchTree.sortedArrayToBST(arr);
+    const sortedList = arr.sort(function(a, b) {return a - b;});
+    this.root = BinarySearchTree.sortedArrayToBST(sortedList);
   }
 
   static sortedArrayToBST(arr) {
@@ -54,6 +68,10 @@ class BinarySearchTree {
     }
     return false;
   }
+
+  printSorted(){
+    this.root.printInOrder();
+  }
 }
 
 
@@ -65,3 +83,9 @@ console.log(bst.keyExist(2)); // true
 console.log(bst.search(2)); // BinaryTree { data: 2, left: null, right: null }
 console.log(bst.keyExist(34)); // false
 console.log(bst.search(34)); // null
+
+console.log('==========');
+let bst1 = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+let bst2 = new BinarySearchTree([4, 43, 36, 46, 32, 7, 97, 95, 34, 8, 96, 35, 85, 1010, 232]);
+bst1.printSorted(); // 1 2 3 4 5 6 7 8 9 10 11
+bst2.printSorted(); // 4 7 8 32 34 35 36 43 46 85 95 96 97 232 1010
