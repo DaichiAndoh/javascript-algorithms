@@ -17,6 +17,30 @@ class BinaryTree{
       this.inOrderWalk(tRoot.right);
     }
   }
+
+  preOrderWalk(tRoot) {
+    if (tRoot !== null) {
+      process.stdout.write(tRoot.data + ' ');
+      this.preOrderWalk(tRoot.left);
+      this.preOrderWalk(tRoot.right);
+    }
+  }
+
+  postOrderWalk(tRoot) {
+    if (tRoot !== null) {
+      this.postOrderWalk(tRoot.left);
+      this.postOrderWalk(tRoot.right);
+      process.stdout.write(tRoot.data + ' ');
+    }
+  }
+
+  reverseOrderWalk(tRoot){
+    if(tRoot != null){
+      this.reverseOrderWalk(tRoot.right);
+      process.stdout.write(tRoot.data + ' ');
+      this.reverseOrderWalk(tRoot.left);
+    }
+  }
 }
 
 class BinarySearchTree {
