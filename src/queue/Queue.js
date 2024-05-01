@@ -59,6 +59,6 @@ q.enqueue(68);
 console.log(q.peekFront()); // 10
 console.log(q.peekBack()); // 68
 
-console.log("dequeued: " + q.dequeue()); // 10
+console.log('dequeued: ' + q.dequeue()); // 10
 console.log(q.peekFront()); // 5
 console.log(q.peekBack()); // 68

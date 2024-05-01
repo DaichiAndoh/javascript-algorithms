@@ -45,8 +45,8 @@ class BinaryTree{
 
 class BinarySearchTree {
   constructor(arr) {
-    const sortedList = arr.sort(function(a, b) {return a - b;});
-    this.root = BinarySearchTree.sortedArrayToBST(sortedList);
+    const sortedArr = arr.sort(function(a, b) {return a - b;});
+    this.root = BinarySearchTree.sortedArrayToBST(sortedArr);
   }
 
   static sortedArrayToBST(arr) {
@@ -99,7 +99,7 @@ class BinarySearchTree {
 }
 
 
-const bst = new BinarySearchTree([1,2,3,4,5,6,7,8,9,10,11]);
+const bst = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 console.log(bst.root); // BinaryTree { data: 6, ... }
 console.log(bst.keyExist(6)); // true
 console.log(bst.search(6)); // BinaryTree { data: 6, ... }

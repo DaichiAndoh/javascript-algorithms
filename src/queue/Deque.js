@@ -129,4 +129,4 @@ function getMaxWindows(arr, k) {
   return results;
 }
 
-console.log(getMaxWindows([34,35,64,34,10,2,14,5,353,23,35,63,23], 4)); // [64, 64, 64, 34, 14, 353, 353, 353, 353, 63]
+console.log(getMaxWindows([34, 35, 64, 34, 10, 2, 14, 5, 353, 23, 35, 63, 23], 4)); // [64, 64, 64, 34, 14, 353, 353, 353, 353, 63]

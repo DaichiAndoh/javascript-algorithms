@@ -38,7 +38,7 @@ class DoublyLinkedList{
 
   printInReverse(){
     let iterator = this.tail;
-    let dataListStr = "";
+    let dataListStr = '';
     while(iterator != null){
       dataListStr += iterator.data + ' ';
       iterator = iterator.prev;
