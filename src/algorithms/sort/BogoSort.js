@@ -23,5 +23,6 @@ class BogoSort {
   }
 }
 
+
 const arr = [2, 4, 3, 1, 5];
 console.log(BogoSort.sort(arr));

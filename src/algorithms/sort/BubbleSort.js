@@ -12,5 +12,6 @@ class BubbleSort {
   }
 }
 
+
 const arr = [2, 4, 3, 1, 5];
 console.log(BubbleSort.sort(arr));
