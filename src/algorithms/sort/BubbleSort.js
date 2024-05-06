@@ -1,4 +1,6 @@
-class BubbleSort {
+const Sort = require('./Sort.js');
+
+class BubbleSort extends Sort {
   static sort(arr) {
     const len = arr.length;
     for (let i = 0; i < len; i++) {
@@ -13,5 +15,4 @@ class BubbleSort {
 }
 
 
-const arr = [2, 4, 3, 1, 5];
-console.log(BubbleSort.sort(arr));
+BubbleSort.runSort();

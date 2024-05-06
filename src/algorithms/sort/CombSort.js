@@ -1,5 +1,8 @@
-class CombSort {
+const Sort = require('./Sort.js');
+
+class CombSort extends Sort {
   static sort(arr) {
+    console.log('hello');
     let gap = arr.length;
     let swapped = true;
 
@@ -21,5 +24,4 @@ class CombSort {
 }
 
 
-const arr = [2, 4, 3, 1, 5];
-console.log(CombSort.sort(arr));
+CombSort.runSort();

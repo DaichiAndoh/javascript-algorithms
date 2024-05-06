@@ -1,4 +1,6 @@
-class BogoSort {
+const Sort = require('./Sort.js');
+
+class BogoSort extends Sort {
   static sort(arr) {
     function isSorted(arr) {
       for (let i = 1; i < arr.length; i++) {
@@ -24,5 +26,4 @@ class BogoSort {
 }
 
 
-const arr = [2, 4, 3, 1, 5];
-console.log(BogoSort.sort(arr));
+BogoSort.runSort();

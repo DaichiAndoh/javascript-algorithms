@@ -1,4 +1,6 @@
-class CocktailSort {
+const Sort = require('./Sort.js');
+
+class CocktailSort extends Sort {
   static sort(arr) {
     let swapped = true;
     let start = 0;
@@ -33,5 +35,4 @@ class CocktailSort {
 }
 
 
-const arr = [2, 4, 3, 1, 5];
-console.log(CocktailSort.sort(arr));
+CocktailSort.runSort();
