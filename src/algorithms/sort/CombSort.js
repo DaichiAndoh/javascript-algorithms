@@ -2,7 +2,6 @@ const Sort = require('./Sort.js');
 
 class CombSort extends Sort {
   static sort(arr) {
-    console.log('hello');
     let gap = arr.length;
     let swapped = true;
 
