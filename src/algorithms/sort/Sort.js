@@ -8,6 +8,11 @@ class Sort {
     console.log('befor:', arr);
     this.sort(arr);
     console.log('after:', arr);
+    if (this._isSorted(arr)) {
+      console.log('array is sorted!');
+    } else {
+      console.log('array is not sorted. sort function is incorrect.');
+    }
   }
 
   static _generateRandomArr(len) {
@@ -16,6 +21,15 @@ class Sort {
       arr.push(Math.floor(Math.random() * 1001));
     }
     return arr;
+  }
+
+  static _isSorted(arr) {
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i - 1] > arr[i]) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
