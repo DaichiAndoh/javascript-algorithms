@@ -11,8 +11,10 @@ class MergeSort extends Sort {
     this.sort(left);
     this.sort(right);
 
+    left.push(Infinity);
+    right.push(Infinity);
     let [i, j, k] = [0, 0, 0];
-    while (i < left.length && j < right.length) {
+    while (left[i] !== Infinity || right[j] !== Infinity) {
       if (left[i] <= right[j]) {
         arr[k] = left[i];
         i++;
@@ -20,18 +22,6 @@ class MergeSort extends Sort {
         arr[k] = right[j];
         j++;
       }
-      k++;
-    }
-
-    while (i < left.length) {
-      arr[k] = left[i];
-      i++;
-      k++;
-    }
-
-    while (j < right.length) {
-      arr[k] = right[j];
-      j++;
       k++;
     }
 
