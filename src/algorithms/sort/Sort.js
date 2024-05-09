@@ -6,9 +6,11 @@ class Sort {
   static runSort(len = 10) {
     const arr = this._generateRandomArr(len);
     console.log('befor:', arr);
-    this.sort(arr);
-    console.log('after:', arr);
-    if (this._isSorted(arr)) {
+
+    const sortedArr = this.sort(arr);
+    console.log('after:', sortedArr);
+
+    if (this._isSorted(sortedArr)) {
       console.log('array is sorted!');
     } else {
       console.log('array is not sorted. sort function is incorrect.');
