@@ -1,4 +1,6 @@
-class BinarySearch {
+const Search = require('./Search.js');
+
+class BinarySearch extends Search {
   static search(arr, value) {
     return this._searchHelper(arr, value, 0, arr.length - 1);
   }
@@ -14,6 +16,7 @@ class BinarySearch {
   }
 }
 
+
 const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-console.log(BinarySearch.search(arr, 6)); // 6
-console.log(BinarySearch.search(arr, 10)); // -1
+BinarySearch.runSearch(arr, 6);
+BinarySearch.runSearch(arr, 10);
