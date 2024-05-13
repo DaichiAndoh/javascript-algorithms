@@ -63,11 +63,11 @@ class SinglyLinkedList {
     currentNode.next = newNode;
   }
 
-  popFront(){
+  popFront() {
     this.head = this.head.next;
   }
 
-  delete(index){
+  delete(index) {
     if (index === 0) return this.popFront();
 
     let iterator = this.head;
@@ -76,6 +76,21 @@ class SinglyLinkedList {
       iterator = iterator.next;
     }
     iterator.next = iterator.next.next;
+  }
+
+  reverse() {
+    let previousNode = null;
+    let currentNode = this.head;
+
+    while (currentNode) {
+      const nextNode = currentNode.next;
+      currentNode.next = previousNode;
+
+      previousNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    this.head = previousNode;
   }
 }
 
@@ -108,3 +123,7 @@ singlyLinkedList.popFront();
 singlyLinkedList.printList(); // 23 45 546 67 86 234 56 767 34 1 98 78 555 100
 singlyLinkedList.delete(3);
 singlyLinkedList.printList(); // 23 45 546 86 234 56 767 34 1 98 78 555 100
+
+// リバース
+singlyLinkedList.reverse();
+singlyLinkedList.printList(); // 100 555 78 98 1 34 767 56 234 86 546 45 23
