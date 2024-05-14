@@ -78,7 +78,7 @@ class SinglyLinkedList {
     iterator.next = iterator.next.next;
   }
 
-  reverse() {
+  reverseIterative() {
     let previousNode = null;
     let currentNode = this.head;
 
@@ -91,6 +91,21 @@ class SinglyLinkedList {
     }
 
     this.head = previousNode;
+  }
+
+  reverseRecursive() {
+    function _reverseRecursiveHelper(currentNode, previousNode) {
+      if (currentNode === null) {
+        return previousNode;
+      }
+
+      const nextNode = currentNode.next;
+      currentNode.next = previousNode;
+
+      return _reverseRecursiveHelper(nextNode, currentNode);
+    }
+
+    this.head = _reverseRecursiveHelper(this.head, null);
   }
 }
 
@@ -125,5 +140,7 @@ singlyLinkedList.delete(3);
 singlyLinkedList.printList(); // 23 45 546 86 234 56 767 34 1 98 78 555 100
 
 // リバース
-singlyLinkedList.reverse();
+singlyLinkedList.reverseIterative();
 singlyLinkedList.printList(); // 100 555 78 98 1 34 767 56 234 86 546 45 23
+singlyLinkedList.reverseRecursive();
+singlyLinkedList.printList(); // 23 45 546 86 234 56 767 34 1 98 78 555 100
