@@ -107,6 +107,34 @@ class SinglyLinkedList {
 
     this.head = _reverseRecursiveHelper(this.head, null);
   }
+
+  reverseEven() {
+    function _reverseEvenHelper(currentNode, previousNode) {
+      if (currentNode === null) {
+        return null;
+      }
+
+      let iterator = currentNode;
+      while (iterator && iterator.data % 2 === 0) {
+        const nextNode = iterator.next;
+        iterator.next = previousNode;
+
+        previousNode = iterator;
+        iterator = nextNode;
+      }
+
+      if (iterator !== currentNode) {
+        currentNode.next = iterator;
+        _reverseEvenHelper(iterator, null);
+        return previousNode;
+      } else {
+        currentNode.next = _reverseEvenHelper(currentNode.next, currentNode);
+        return currentNode;
+      }
+    }
+
+    this.head = _reverseEvenHelper(this.head, null);
+  }
 }
 
 
@@ -144,3 +172,5 @@ singlyLinkedList.reverseIterative();
 singlyLinkedList.printList(); // 100 555 78 98 1 34 767 56 234 86 546 45 23
 singlyLinkedList.reverseRecursive();
 singlyLinkedList.printList(); // 23 45 546 86 234 56 767 34 1 98 78 555 100
+singlyLinkedList.reverseEven();
+singlyLinkedList.printList(); // 23 45 56 234 86 546 767 34 1 78 98 555 100
