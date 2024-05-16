@@ -46,7 +46,7 @@ class DoublyLinkedList{
     console.log(dataListStr)
   }
 
-  reverse() {
+  reverseIterative() {
     let currentNode = this.head;
     [this.head, this.tail] = [this.tail, this.head];
 
@@ -56,6 +56,25 @@ class DoublyLinkedList{
       currentNode.next = prev;
       currentNode = currentNode.prev;
     }
+  }
+
+  reverseRecursive() {
+    function _reverseRecursiveHelper(currentNode) {
+      if (currentNode === null) {
+        return null;
+      }
+
+      const prev = currentNode.prev;
+      currentNode.prev = currentNode.next;
+      currentNode.next = prev;
+
+      if (currentNode.prev !== null) {
+        _reverseRecursiveHelper(currentNode.prev);
+      }
+    }
+
+    _reverseRecursiveHelper(this.head);
+    [this.head, this.tail] = [this.tail, this.head];
   }
 
   at(index) {
@@ -136,10 +155,12 @@ console.log(doublyLinkedList.tail.prev.data); // 78
 // 反転
 doublyLinkedList.printList(); // 35 23 546 67 86 234 56 767 34 1 98 78 555
 doublyLinkedList.printInReverse(); // 555 78 98 1 34 767 56 234 86 67 546 23 35
-doublyLinkedList.reverse();
+doublyLinkedList.reverseIterative();
 doublyLinkedList.printList(); // 555 78 98 1 34 767 56 234 86 67 546 23 35
 doublyLinkedList.printInReverse(); // 35 23 546 67 86 234 56 767 34 1 98 78 555
-doublyLinkedList.reverse();
+doublyLinkedList.reverseRecursive();
+doublyLinkedList.printList(); // 35 23 546 67 86 234 56 767 34 1 98 78 555
+doublyLinkedList.printInReverse(); // 555 78 98 1 34 767 56 234 86 67 546 23 35
 
 // 探索
 console.log(doublyLinkedList.at(3).data); // 67
