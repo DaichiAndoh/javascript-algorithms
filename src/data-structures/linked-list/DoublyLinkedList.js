@@ -9,7 +9,7 @@ class Node{
 class DoublyLinkedList{
   constructor(arr){
     if(arr.length === 0){
-      this.head =  new Node(null);
+      this.head = new Node(null);
       this.tail = this.head;
       return;
     }
@@ -75,6 +75,26 @@ class DoublyLinkedList{
 
     _reverseRecursiveHelper(this.head);
     [this.head, this.tail] = [this.tail, this.head];
+  }
+
+  sort() {
+    if (this.head === null) {
+      return null;
+    }
+
+    let currentNode= this.head;
+    while (currentNode.next) {
+      let nextNode = currentNode.next;
+
+      while (nextNode) {
+        if (currentNode.data > nextNode.data) {
+          [currentNode.data, nextNode.data] = [nextNode.data, currentNode.data];
+        }
+        nextNode = nextNode.next;
+      }
+
+      currentNode = currentNode.next;
+    }
   }
 
   at(index) {
@@ -181,3 +201,7 @@ doublyLinkedList.popFront();
 doublyLinkedList.pop();
 doublyLinkedList.deleteNode(doublyLinkedList.at(3));
 doublyLinkedList.printList(); // 35 23 546 67 86 234 56 767 34 1 98 78 555
+
+// ソート
+doublyLinkedList.sort();
+doublyLinkedList.printList(); // 1 23 34 35 56 67 78 86 98 234 546 555 767
