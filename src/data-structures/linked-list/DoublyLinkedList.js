@@ -9,7 +9,7 @@ class Node{
 class DoublyLinkedList{
   constructor(arr){
     if(arr.length === 0){
-      this.head = new Node(null);
+      this.head = null;
       this.tail = this.head;
       return;
     }
@@ -78,26 +78,28 @@ class DoublyLinkedList{
   }
 
   sort() {
-    if (this.head === null) {
-      return null;
-    }
-
-    let currentNode= this.head;
-    while (currentNode.next) {
-      let nextNode = currentNode.next;
-
-      while (nextNode) {
-        if (currentNode.data > nextNode.data) {
-          [currentNode.data, nextNode.data] = [nextNode.data, currentNode.data];
+    if (this.head !== null) {
+      let currentNode= this.head;
+      while (currentNode.next) {
+        let nextNode = currentNode.next;
+  
+        while (nextNode) {
+          if (currentNode.data > nextNode.data) {
+            [currentNode.data, nextNode.data] = [nextNode.data, currentNode.data];
+          }
+          nextNode = nextNode.next;
         }
-        nextNode = nextNode.next;
+  
+        currentNode = currentNode.next;
       }
-
-      currentNode = currentNode.next;
     }
   }
 
   at(index) {
+    if (this.head === null) {
+      return null;
+    }
+
     let currentNode = this.head;
 
     for (let i = 0; i < index; i++) {
@@ -122,17 +124,26 @@ class DoublyLinkedList{
   }
 
   preappend(newNode){
-    this.head.prev = newNode;
-    newNode.next = this.head;
-    newNode.prev = null;
-    this.head = newNode;
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = this.head;
+    } else {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      newNode.prev = null;
+      this.head = newNode;
+    }
   }
 
   append(newNode){
-    this.tail.next = newNode;
-    newNode.next = null;
-    newNode.prev = this.tail;
-    this.tail = newNode;
+    if (this.tail === null) {
+      this.preappend(newNode);
+    } else {
+      this.tail.next = newNode;
+      newNode.next = null;
+      newNode.prev = this.tail;
+      this.tail = newNode;
+    }
   }
 
   addNextNode(node, newNode){
@@ -146,13 +157,17 @@ class DoublyLinkedList{
   }
 
   popFront() {
-    this.head = this.head.next;
-    this.head.prev = null;
+    if (this.head !== null) {
+      this.head = this.head.next;
+      this.head.prev = null;
+    }
   }
 
   pop() {
-    this.tail = this.tail.prev;
-    this.tail.next = null;
+    if (this.tail !== null) {
+      this.tail = this.tail.prev;
+      this.tail.next = null;
+    }
   }
 
   deleteNode(node) {
