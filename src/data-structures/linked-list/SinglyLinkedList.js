@@ -7,7 +7,7 @@ class Node {
 
 class SinglyLinkedList {
   constructor(arr) {
-    this.head = arr.length > 0 ? new Node(arr[0]) : new Node(null);
+    this.head = arr.length > 0 ? new Node(arr[0]) : null;
 
     let currentNode = this.head;
     for (let i = 1; i < arr.length; i++) {
@@ -27,6 +27,10 @@ class SinglyLinkedList {
   }
 
   at(index) {
+    if (this.head === null) {
+      return null;
+    }
+
     let currentNode = this.head;
 
     for (let i = 0; i < index; i++) {
@@ -51,24 +55,39 @@ class SinglyLinkedList {
   }
 
   preappend(newNode) {
-    newNode.next = this.head;
-    this.head = newNode;
+    if (this.head === null) {
+      this.head = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
   }
 
   append(newNode) {
-    let currentNode = this.head;
-    while(currentNode.next !== null) {
-      currentNode = currentNode.next;
+    if (this.head === null) {
+      this.preappend(newNode);
+    } else {
+      let currentNode = this.head;
+      while(currentNode.next !== null) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = newNode;
     }
-    currentNode.next = newNode;
   }
 
   popFront() {
-    this.head = this.head.next;
+    if (this.head !== null) {
+      this.head = this.head.next;
+    }
   }
 
   delete(index) {
-    if (index === 0) return this.popFront();
+    if (index === 0) {
+      return this.popFront();
+    }
+    if (this.head === null) {
+      return;
+    }
 
     let iterator = this.head;
     for(let i = 0; i < index - 1; i++){
