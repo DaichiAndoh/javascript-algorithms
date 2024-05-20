@@ -1,7 +1,7 @@
 /**
  * arrから合計値がvalueになるペアを返す
- * @param {number[]} arr 
- * @param {number} value 
+ * @param {number[]} arr 整数値配列
+ * @param {number} value 合計値
  * @returns {number[] | null} ペア配列 or null
  */
 function getPair(arr, value) {
@@ -24,8 +24,8 @@ console.log(getPair([11, 2, 5, 9, 10, 3], 25)); // null
 
 
 /**
- * 配列から合計値が配列の合計値の半分になるペアを返す
- * @param {number[]} arr 
+ * arrから合計値がarrの合計値の半分になるペアを返す
+ * @param {number[]} arr 整数値配列
  * @returns {number[] | null} ペア配列 or null
  */
 function getHalfPair(arr) {
