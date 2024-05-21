@@ -1,7 +1,7 @@
 /**
  * queueの要素を逆にする
- * @param {*} queue キュー
- * @returns queueの要素を逆にしたキュー
+ * @param {number[]} queue キュー
+ * @returns {number[]} queueの要素を逆にしたキュー
  */
 function reverseQueue(queue) {
   const newQueue = [];
