@@ -96,6 +96,19 @@ class BinarySearchTree {
   printSorted(){
     this.root.printInOrder();
   }
+
+  insert(value){
+    let iterator = this.root;
+
+    while (iterator !== null) {
+      if (iterator.data > value && iterator.left === null) {
+        iterator.left = new BinaryTree(value);
+      } else if (iterator.data < value && iterator.right === null) {
+        iterator.right = new BinaryTree(value);
+      }
+      iterator = iterator.data > value ? iterator.left : iterator.right;
+    }
+  }
 }
 
 
@@ -109,7 +122,16 @@ console.log(bst.keyExist(34)); // false
 console.log(bst.search(34)); // null
 
 console.log('==========');
-let bst1 = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
-let bst2 = new BinarySearchTree([4, 43, 36, 46, 32, 7, 97, 95, 34, 8, 96, 35, 85, 1010, 232]);
+const bst1 = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+const bst2 = new BinarySearchTree([4, 43, 36, 46, 32, 7, 97, 95, 34, 8, 96, 35, 85, 1010, 232]);
 bst1.printSorted(); // 1 2 3 4 5 6 7 8 9 10 11
 bst2.printSorted(); // 4 7 8 32 34 35 36 43 46 85 95 96 97 232 1010
+
+console.log('==========');
+const bst3 = new BinarySearchTree([1, 3, 5, 7, 9]);
+bst3.insert(11);
+bst3.printSorted(); // 1 3 5 7 9 11
+console.log(bst3.search(9)); // value of right node is 11
+bst3.insert(6);
+bst3.printSorted(); // 1 3 5 6 7 9 11
+console.log(bst3.search(7)); // value of left node is 6
