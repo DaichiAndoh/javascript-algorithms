@@ -97,8 +97,13 @@ class BinarySearchTree {
     this.root.printInOrder();
   }
 
-  insert(value){
+  insertWhile(value){
     let iterator = this.root;
+
+    if (iterator === null) {
+      this.root = new BinaryTree(value);
+      return;
+    }
 
     while (iterator !== null) {
       if (iterator.data > value && iterator.left === null) {
@@ -108,6 +113,24 @@ class BinarySearchTree {
       }
       iterator = iterator.data > value ? iterator.left : iterator.right;
     }
+  }
+
+  insertRecursive(value) {
+    function insertRecursiveHelper(node, value) {
+      if (node === null) {
+        return new BinaryTree(value);
+      }
+
+      if (node.data > value) {
+        node.left = insertRecursiveHelper(node.left, value);
+      } else {
+        node.right = insertRecursiveHelper(node.right, value);
+      }
+
+      return node;
+    }
+
+    this.root = insertRecursiveHelper(this.root, value);
   }
 }
 
@@ -129,9 +152,17 @@ bst2.printSorted(); // 4 7 8 32 34 35 36 43 46 85 95 96 97 232 1010
 
 console.log('==========');
 const bst3 = new BinarySearchTree([1, 3, 5, 7, 9]);
-bst3.insert(11);
+bst3.insertWhile(11);
 bst3.printSorted(); // 1 3 5 7 9 11
 console.log(bst3.search(9)); // value of right node is 11
-bst3.insert(6);
+bst3.insertWhile(6);
 bst3.printSorted(); // 1 3 5 6 7 9 11
 console.log(bst3.search(7)); // value of left node is 6
+
+const bst4 = new BinarySearchTree([1, 3, 5, 7, 9]);
+bst4.insertRecursive(11);
+bst4.printSorted(); // 1 3 5 7 9 11
+console.log(bst4.search(9)); // value of right node is 11
+bst4.insertRecursive(6);
+bst4.printSorted(); // 1 3 5 6 7 9 11
+console.log(bst4.search(7)); // value of left node is 6
