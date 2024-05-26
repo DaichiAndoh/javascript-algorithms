@@ -134,7 +134,7 @@ class BinarySearchTree {
   }
 }
 
-
+/** BinarySearchTree作成 */
 const bst = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 console.log(bst.root); // BinaryTree { data: 6, ... }
 console.log(bst.keyExist(6)); // true
@@ -144,12 +144,14 @@ console.log(bst.search(2)); // BinaryTree { data: 2, left: null, right: null }
 console.log(bst.keyExist(34)); // false
 console.log(bst.search(34)); // null
 
+/** BinarySearchTreeソート */
 console.log('==========');
 const bst1 = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const bst2 = new BinarySearchTree([4, 43, 36, 46, 32, 7, 97, 95, 34, 8, 96, 35, 85, 1010, 232]);
 bst1.printSorted(); // 1 2 3 4 5 6 7 8 9 10 11
 bst2.printSorted(); // 4 7 8 32 34 35 36 43 46 85 95 96 97 232 1010
 
+/** BinarySearchTree挿入 */
 console.log('==========');
 const bst3 = new BinarySearchTree([1, 3, 5, 7, 9]);
 bst3.insertWhile(11);
@@ -166,3 +168,17 @@ console.log(bst4.search(9)); // value of right node is 11
 bst4.insertRecursive(6);
 bst4.printSorted(); // 1 3 5 6 7 9 11
 console.log(bst4.search(7)); // value of left node is 6
+
+const bst5 = new BinarySearchTree([]);
+console.log(bst5); // BinarySearchTree { root: null }
+bst5.insertWhile(3);
+bst5.insertRecursive(1);
+bst5.insertWhile(5);
+bst5.insertRecursive(2);
+bst5.insertWhile(8);
+bst5.printSorted(); // 1 2 3 5 8
+console.log(bst5.root.data); // 3
+console.log(bst5.root.left.data); // 1
+console.log(bst5.root.left.right.data); // 2
+console.log(bst5.root.right.data); // 5
+console.log(bst5.root.right.right.data); // 8
