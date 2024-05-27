@@ -73,7 +73,7 @@ class BinarySearchTree {
     return root;
   }
 
-  search(key) {
+  searchWhile(key) {
     let iterator = this.root;
     while (iterator !== null) {
       if (iterator.data === key) return iterator;
@@ -81,6 +81,20 @@ class BinarySearchTree {
       else iterator = iterator.right;
     }
     return null;
+  }
+
+  searchRecursive(key) {
+    function searchRecursiveHelper(node, key) {
+      if (node === null) {
+        return null;
+      }
+
+      if (node.data === key) return node;
+      if (node.data > key) return searchRecursiveHelper(node.left, key);
+      else return searchRecursiveHelper(node.right, key);
+    }
+
+    return searchRecursiveHelper(this.root, key);
   }
 
   keyExist(key) {
@@ -138,11 +152,11 @@ class BinarySearchTree {
 const bst = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 console.log(bst.root); // BinaryTree { data: 6, ... }
 console.log(bst.keyExist(6)); // true
-console.log(bst.search(6)); // BinaryTree { data: 6, ... }
+console.log(bst.searchWhile(6)); // BinaryTree { data: 6, ... }
 console.log(bst.keyExist(2)); // true
-console.log(bst.search(2)); // BinaryTree { data: 2, left: null, right: null }
+console.log(bst.searchRecursive(2)); // BinaryTree { data: 2, left: null, right: null }
 console.log(bst.keyExist(34)); // false
-console.log(bst.search(34)); // null
+console.log(bst.searchWhile(34)); // null
 
 /** BinarySearchTreeソート */
 console.log('==========');
@@ -156,18 +170,18 @@ console.log('==========');
 const bst3 = new BinarySearchTree([1, 3, 5, 7, 9]);
 bst3.insertWhile(11);
 bst3.printSorted(); // 1 3 5 7 9 11
-console.log(bst3.search(9)); // value of right node is 11
+console.log(bst3.searchWhile(9)); // value of right node is 11
 bst3.insertWhile(6);
 bst3.printSorted(); // 1 3 5 6 7 9 11
-console.log(bst3.search(7)); // value of left node is 6
+console.log(bst3.searchWhile(7)); // value of left node is 6
 
 const bst4 = new BinarySearchTree([1, 3, 5, 7, 9]);
 bst4.insertRecursive(11);
 bst4.printSorted(); // 1 3 5 7 9 11
-console.log(bst4.search(9)); // value of right node is 11
+console.log(bst4.searchWhile(9)); // value of right node is 11
 bst4.insertRecursive(6);
 bst4.printSorted(); // 1 3 5 6 7 9 11
-console.log(bst4.search(7)); // value of left node is 6
+console.log(bst4.searchWhile(7)); // value of left node is 6
 
 const bst5 = new BinarySearchTree([]);
 console.log(bst5); // BinarySearchTree { root: null }
