@@ -97,7 +97,7 @@ class BinarySearchTree {
     return searchRecursiveHelper(this.root, key);
   }
 
-  keyExist(key) {
+  keyExistWhile(key) {
     let iterator = this.root;
     while (iterator !== null) {
       if (iterator.data === key) return true;
@@ -105,6 +105,20 @@ class BinarySearchTree {
       else iterator = iterator.right;
     }
     return false;
+  }
+
+  keyExistRecursive(key) {
+    function keyExistRecursiveHelper(node, key) {
+      if (node === null) {
+        return false;
+      }
+
+      if (node.data === key) return true;
+      if (node.data > key) return keyExistRecursiveHelper(node.left, key);
+      else return keyExistRecursiveHelper(node.right, key);
+    }
+
+    return keyExistRecursiveHelper(this.root, key);
   }
 
   printSorted(){
@@ -151,11 +165,11 @@ class BinarySearchTree {
 /** BinarySearchTree作成 */
 const bst = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 console.log(bst.root); // BinaryTree { data: 6, ... }
-console.log(bst.keyExist(6)); // true
+console.log(bst.keyExistWhile(6)); // true
 console.log(bst.searchWhile(6)); // BinaryTree { data: 6, ... }
-console.log(bst.keyExist(2)); // true
+console.log(bst.keyExistRecursive(2)); // true
 console.log(bst.searchRecursive(2)); // BinaryTree { data: 2, left: null, right: null }
-console.log(bst.keyExist(34)); // false
+console.log(bst.keyExistWhile(34)); // false
 console.log(bst.searchWhile(34)); // null
 
 /** BinarySearchTreeソート */
