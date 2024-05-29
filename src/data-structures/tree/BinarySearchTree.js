@@ -1,5 +1,5 @@
-class BinaryTree{
-  constructor(data, left = null, right = null){
+class BinaryTree {
+  constructor(data, left = null, right = null) {
     this.data = data;
     this.left = left;
     this.right = right;
@@ -35,7 +35,7 @@ class BinaryTree{
   }
 
   reverseOrderWalk(tRoot){
-    if(tRoot != null){
+    if (tRoot != null) {
       this.reverseOrderWalk(tRoot.right);
       process.stdout.write(tRoot.data + ' ');
       this.reverseOrderWalk(tRoot.left);
@@ -71,6 +71,10 @@ class BinarySearchTree {
 
     const root = new BinaryTree(arr[mid], left, right);
     return root;
+  }
+
+  printSorted() {
+    this.root.printInOrder();
   }
 
   searchWhile(key) {
@@ -121,10 +125,6 @@ class BinarySearchTree {
     return keyExistRecursiveHelper(this.root, key);
   }
 
-  printSorted(){
-    this.root.printInOrder();
-  }
-
   insertWhile(value){
     let iterator = this.root;
 
@@ -161,6 +161,7 @@ class BinarySearchTree {
     this.root = insertRecursiveHelper(this.root, value);
   }
 }
+
 
 /** BinarySearchTree作成 */
 const bst = new BinarySearchTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
