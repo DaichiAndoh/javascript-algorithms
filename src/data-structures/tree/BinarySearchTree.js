@@ -160,6 +160,40 @@ class BinarySearchTree {
 
     this.root = insertRecursiveHelper(this.root, value);
   }
+
+  delete(value) {
+    function getMinNode(node) {
+      let iterator = node;
+      while (iterator.left !== null) {
+        iterator = iterator.left;
+      }
+      return iterator;
+    }
+
+    function deleteHelper(node, value) {
+      if (node === null) return null;
+
+      if (node.data > value) {
+        node.left = deleteHelper(node.left, value);
+      } else if (node.data < value) {
+        node.right = deleteHelper(node.right, value);
+      } else {
+        if (node.left === null) {
+          return node.right;
+        } else if (node.right === null) {
+          return node.left;
+        }
+
+        const temp = getMinNode(node.right);
+        node.data = temp.data;
+        node.right = deleteHelper(node.right, temp.data);
+      }
+
+      return node;
+    }
+
+    deleteHelper(this.root, value);
+  }
 }
 
 
@@ -211,3 +245,14 @@ console.log(bst5.root.left.data); // 1
 console.log(bst5.root.left.right.data); // 2
 console.log(bst5.root.right.data); // 5
 console.log(bst5.root.right.right.data); // 8
+
+/** BinarySearchTree削除 */
+console.log('==========');
+const bst6 = new BinarySearchTree([1, 3, 5, 7, 9, 11, 13]);
+bst6.printSorted(); // 1 3 5 7 9 11 13
+bst6.delete(5);
+bst6.printSorted(); // 1 3 7 9 11 13
+bst6.delete(11);
+bst6.printSorted(); // 1 3 7 9 13
+bst6.delete(10);
+bst6.printSorted(); // 1 3 7 9 13
