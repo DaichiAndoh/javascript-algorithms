@@ -1,15 +1,15 @@
 const Heap = require('./Heap.js');
 
-class MinHeap extends Heap{
-  static minHeapify(arr, heapEnd, i){
+class MinHeap extends Heap {
+  static minHeapify(arr, heapEnd, i) {
     const l = this.left(i);
     const r = this.right(i);
 
     let smallest = i;
-    if(l <= heapEnd && arr[l] < arr[smallest]) smallest = l;
-    if(r <= heapEnd && arr[r] < arr[smallest]) smallest = r;
+    if (l <= heapEnd && arr[l] < arr[smallest]) smallest = l;
+    if (r <= heapEnd && arr[r] < arr[smallest]) smallest = r;
 
-    if(smallest != i){
+    if (smallest !== i) {
       const temp = arr[i];
       arr[i] = arr[smallest];
       arr[smallest] = temp;
@@ -35,12 +35,13 @@ class MinHeap extends Heap{
       arr[heapEnd] = arr[0];
       arr[0] = temp;
 
-      heapEnd -= 1;
+      heapEnd--;
 
       this.minHeapify(arr, heapEnd, 0);
     }
   }
 }
+
 
 const heap1 = [2, 42, 11, 30, 10, 7, 6, 5, 9];
 console.log(heap1);

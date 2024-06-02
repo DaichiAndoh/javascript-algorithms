@@ -1,15 +1,15 @@
 const Heap = require('./Heap.js');
 
 class MaxHeap extends Heap {
-  static maxHeapify(arr, heapEnd, i){
+  static maxHeapify(arr, heapEnd, i) {
     const l = this.left(i);
     const r = this.right(i);
 
     let biggest = i;
-    if(l <= heapEnd && arr[l] > arr[biggest]) biggest = l;
-    if(r <= heapEnd && arr[r] > arr[biggest]) biggest = r;
+    if (l <= heapEnd && arr[l] > arr[biggest]) biggest = l;
+    if (r <= heapEnd && arr[r] > arr[biggest]) biggest = r;
 
-    if(biggest != i){
+    if (biggest !== i) {
       const temp = arr[i];
       arr[i] = arr[biggest];
       arr[biggest] = temp;
@@ -35,12 +35,13 @@ class MaxHeap extends Heap {
       arr[heapEnd] = arr[0];
       arr[0] = temp;
 
-      heapEnd -= 1;
+      heapEnd--;
 
       this.maxHeapify(arr, heapEnd, 0);
     }
   }
 }
+
 
 const heap1 = [2, 42, 11, 30, 10, 7, 6, 5, 9];
 console.log(heap1);
