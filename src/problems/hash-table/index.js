@@ -48,3 +48,27 @@ function getHalfPair(arr) {
 
 console.log(getHalfPair([11, 2, 5, 9, 10, 3])); // [ 11, 9 ]
 console.log(getHalfPair([11, 2, 6, 9, 10, 3])); // null
+
+
+/**
+ * arrから左右対称となる要素の配列を返す
+ * @param {number[][]} 2つの数値を持つ配列の配列
+ * @returns {number[][]} 左右対称となる要素の配列
+ */
+function getSymmetricPair(arr) {
+  const cache = {};
+  const result = [];
+
+  for (const item of arr) {
+    const [first, second] = item;
+    if (second in cache && cache[second] === first) {
+      result.push(item);
+    } else {
+      cache[first] = second;
+    }
+  }
+
+  return result;
+}
+
+console.log(getSymmetricPair([[1, 2], [3, 5], [4, 7], [5, 3], [7, 4]])); // [[5, 3], [7, 4]]
