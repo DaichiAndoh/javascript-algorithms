@@ -72,3 +72,32 @@ function getSymmetricPair(arr) {
 }
 
 console.log(getSymmetricPair([[1, 2], [3, 5], [4, 7], [5, 3], [7, 4]])); // [[5, 3], [7, 4]]
+
+
+/**
+ * strで最も多く出現する文字を返す
+ * @param {string} str 文字列
+ * @returns {{ char: string, count: number }} 最も多く出現する文字とその数を持つオブジェクト
+ */
+function mostFrequentChar(str) {
+  const countMap = {};
+
+  for (const char of str) {
+    if (countMap[char]) countMap[char]++;
+    else countMap[char] = 1;
+  }
+
+  let maxChar = '';
+  let maxCount = 0;
+
+  for (const char in countMap) {
+    if (countMap[char] > maxCount) {
+      maxCount = countMap[char];
+      maxChar = char;
+    }
+  }
+
+  return { char: maxChar, count: maxCount };
+}
+
+console.log(mostFrequentChar('javascript')); // { char: 'a', count: 2 }
