@@ -101,3 +101,46 @@ function mostFrequentChar(str) {
 }
 
 console.log(mostFrequentChar('javascript')); // { char: 'a', count: 2 }
+
+
+/**
+ * arr1とarr2の両方に存在する数値がある場合に、
+ * その数値の数が小さい方の配列からその数値を削除した新しい配列を返す
+ * @param {number[]} arr1 整数値配列
+ * @param {number[]} arr2 整数値配列
+ * @returns {{ arr1: number[], arr2: number[] }} 処理後の2つの整数値配列を持つオブジェクト
+ */
+function minCountRemove(arr1, arr2) {
+  const arr1CountMap = {};
+  const arr2CountMap = {};
+
+  for (const num of arr1) {
+    if (arr1CountMap[num]) arr1CountMap[num]++;
+    else arr1CountMap[num] = 1;
+  }
+  for (const num of arr2) {
+    if (arr2CountMap[num]) arr2CountMap[num]++;
+    else arr2CountMap[num] = 1;
+  }
+
+  for (const num in arr1CountMap) {
+    const arr1Count = arr1CountMap[num];
+    const arr2Count = arr2CountMap[num];
+
+    if (arr2Count) {
+      if (arr1Count < arr2Count) {
+        arr1 = arr1.filter(_num => _num != num);
+      } else if (arr1Count > arr2Count) {
+        arr2 = arr2.filter(_num => _num != num);
+      }
+    }
+  }
+
+  return { arr1, arr2 };
+}
+
+const arr1 = [1, 2, 3, 4, 4, 5, 5, 8, 10];
+const arr2 = [4, 5, 5, 5, 6, 7, 8, 8, 10];
+const { arr1: _arr1, arr2: _arr2 } = minCountRemove(arr1, arr2);
+console.log(_arr1); // [1, 2, 3, 4, 4, 10]
+console.log(_arr2); // [5, 5, 5, 6, 7, 8, 8, 10]
