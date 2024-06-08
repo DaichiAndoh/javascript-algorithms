@@ -114,3 +114,43 @@ function snakeStringV2(arr, depth) {
 for (const arr of snakeStringV2('abcdefghijklmnopqrstuvwxyz', 5)) {
   console.log(arr.join(''));
 }
+
+
+/**
+ * arr内で連続する数値の最大（or最小）合計値を返す
+ * operatorでmaxが指定された場合は最大合計値、minが指定された場合は最小合計値
+ * @param {number[]} arr 整数値配列
+ * @param {function(...number): number} operator Math.max or Math.min
+ * @returns {number} 連続する数値の最大合計値
+ */
+function getMaxMinSequenceSum(arr, operator = Math.max) {
+  let resultSequence, sumSequence;
+  resultSequence = sumSequence = 0;
+
+  for (const num of arr) {
+    sumSequence = operator(num, sumSequence + num);
+    resultSequence = operator(sumSequence, resultSequence);
+  }
+
+  return resultSequence;
+}
+
+console.log(getMaxMinSequenceSum([1, -2, 3, 6, -1, 2, 4, -5, 2]));
+console.log(getMaxMinSequenceSum([1, -2, 3, 6, -1, 2, 4, -5, 2], Math.min));
+
+
+/**
+ * 循環可能なarr内で連続する数値の最大（or最小）合計値を返す
+ * @param {number[]} arr 整数値配列
+ * @returns {number} 連続する数値の最大合計値
+ */
+function getMaxCircularSequenceSum(arr) {
+  const maxSqeuenceSum = getMaxMinSequenceSum(arr);
+  const maxCircularSequenceSum =
+    arr.reduce((acc, cur) => acc + cur, 0) - getMaxMinSequenceSum(arr, Math.min);
+
+  return Math.max(maxSqeuenceSum, maxCircularSequenceSum);
+}
+
+console.log(getMaxCircularSequenceSum([1, -2, 3, 6, -1, 2, 4, -5, 2]));
+console.log(getMaxCircularSequenceSum([1, 2, 3, -1, -2, 6, -2, -3, 1, 2 ,3]));
