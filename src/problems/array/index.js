@@ -154,3 +154,18 @@ function getMaxCircularSequenceSum(arr) {
 
 console.log(getMaxCircularSequenceSum([1, -2, 3, 6, -1, 2, 4, -5, 2]));
 console.log(getMaxCircularSequenceSum([1, 2, 3, -1, -2, 6, -2, -3, 1, 2 ,3]));
+
+
+/**
+ * arrから重複を削除した配列を返す
+ * @param {number[]} arr ソート済みの整数値配列
+ * @returns {number[]} 重複を削除した整数値配列
+ */
+function deleteDuplicate(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    if (arr[i] === arr[i - 1]) arr.splice(i, 1);
+  }
+  return arr;
+}
+
+console.log(deleteDuplicate([1, 2, 2, 3, 3, 3, 3, 4, 5, 5, 5]));
