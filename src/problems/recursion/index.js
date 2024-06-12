@@ -20,3 +20,30 @@ function getAllPermutations(arr) {
 }
 
 console.log(getAllPermutations([1, 2, 3]));
+
+
+/**
+ * strが回文かどうかの判定結果を返す
+ * @param {string} str 文字列
+ * @returns {boolean} 判定結果（true or false）
+ */
+function isPalindrome(str) {
+  const len = str.length;
+
+  if (len === 0) return false;
+  if (len === 1) return true;
+
+  let start = 0;
+  let end = len - 1;
+
+  while (start < end) {
+    if (str[start] !== str[end]) return false;
+    start++;
+    end--;
+  }
+
+  return true;
+}
+
+console.log(isPalindrome('abc'));
+console.log(isPalindrome('abcba'));
