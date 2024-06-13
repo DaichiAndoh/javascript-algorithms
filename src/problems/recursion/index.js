@@ -47,3 +47,41 @@ function isPalindrome(str) {
 
 console.log(isPalindrome('abc'));
 console.log(isPalindrome('abcba'));
+
+
+/**
+ * str内の全ての回文をまとめた配列を返す
+ * @param {string} str 文字列
+ * @returns {string[]} str内の全ての回文をまとめた配列
+ */
+function findPalindrome(str) {
+  const result = [];
+  const len = str.length;
+
+  if (len === 0) return false;
+  if (len === 1) return true;
+
+  for (let i = 1; i < str.length; i++) {
+    result.push(...findPalindromeHelper(str, i - 1, i + 1));
+    result.push(...findPalindromeHelper(str, i - 1, i));
+  }
+
+  return result;
+}
+
+function findPalindromeHelper(str, left, right) {
+  const result = [];
+
+  while (left >= 0 && right < str.length) {
+    if (str[left] !== str[right]) break;
+    
+    result.push(str.slice(left, right + 1));
+    left--;
+    right++;
+  }
+
+  return result;
+}
+
+console.log(findPalindrome('abcba'));
+console.log(findPalindrome('abcbabcbc'));
