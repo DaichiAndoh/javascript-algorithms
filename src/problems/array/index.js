@@ -169,3 +169,27 @@ function deleteDuplicate(arr) {
 }
 
 console.log(deleteDuplicate([1, 2, 2, 3, 3, 3, 3, 4, 5, 5, 5]));
+
+
+/**
+ * arr内の要素の並びを偶数値->奇数値にして元の配列を返す
+ * @param {number[]} arr 整数値配列 
+ * @returns {number[]} 要素の並びを偶数値->奇数値にした元の配列
+ */
+function orderEvenFirstOddLast(arr) {
+  let start = 0;
+  let end = arr.length - 1;
+
+  while (start < end) {
+    if (arr[start] % 2 === 0) {
+      start++;
+    } else {
+      [arr[start], arr[end]] = [arr[end], arr[start]];
+      end--;
+    }
+  }
+
+  return arr;
+}
+
+console.log(orderEvenFirstOddLast([0, 3, 2, 5, 9, 8, 7, 6, 1, 4]));
