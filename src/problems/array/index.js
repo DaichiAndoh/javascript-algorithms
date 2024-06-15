@@ -193,3 +193,27 @@ function orderEvenFirstOddLast(arr) {
 }
 
 console.log(orderEvenFirstOddLast([0, 3, 2, 5, 9, 8, 7, 6, 1, 4]));
+
+
+/**
+ * charsの要素をindexesの通りに並び替えて文字列にしたものを返す
+ * @param {string[]} chars 文字配列
+ * @param {string[]} indexes 正しいインデックスの配列
+ * @returns {string} 正しい順番に並び替えられた文字列
+ */
+function orderChangeByIndexes(chars, indexes) {
+  for (let i = 0; i < indexes.length; i++) {
+    while (i !== indexes[i]) {
+      const index = indexes[i];
+      [chars[i], chars[index]] = [chars[index], chars[i]];
+      [indexes[i], indexes[index]] = [indexes[index], indexes[i]];
+    }
+  }
+
+  return chars.join('');
+}
+
+console.log(orderChangeByIndexes(
+  ['v', 'J', 'S', 'c', 't', 'a', 'r', 'a', 'i', 'p'],
+  [2, 0, 4, 5, 9, 1, 6, 3, 7, 8],
+));
