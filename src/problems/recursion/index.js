@@ -85,3 +85,45 @@ function findPalindromeHelper(str, left, right) {
 
 console.log(findPalindrome('abcba'));
 console.log(findPalindrome('abcbabcbc'));
+
+
+/**
+ * phoneNumberから生成できる全てのニーモニックの配列を返す
+ * @param {string} phoneNumber 電話番号を示す文字列
+ * @returns {string[]} 電話番号から生成できる全てのニーモニックの配列
+ */
+function getPhoneMnemoics(phoneNumber) {
+  const NUM_ALPHABET_MAP = {
+    0: '+',
+    1: '@',
+    2: 'ABC',
+    3: 'DEF',
+    4: 'GHI',
+    5: 'JKL',
+    6: 'MNO',
+    7: 'PQRS',
+    8: 'TUV',
+    9: 'WXYZ',
+  };
+
+  const phoneNumberArr = phoneNumber.replace(/-/g, '').split('').map(n => parseInt(n));
+  const candidate = [];
+  const temp = [];
+  for (const _ in phoneNumberArr) temp.push('');
+
+  function getPhoneMnemoicsHelper(digit = 0) {
+    if (digit === phoneNumberArr.length) {
+      candidate.push(temp.join(''));
+    } else {
+      for (const char of NUM_ALPHABET_MAP[phoneNumberArr[digit]]) {
+        temp[digit] = char;
+        getPhoneMnemoicsHelper(digit + 1);
+      }
+    }
+  }
+
+  getPhoneMnemoicsHelper();
+  return candidate;
+}
+
+console.log(getPhoneMnemoics('1-2-3'));
