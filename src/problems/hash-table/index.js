@@ -144,3 +144,29 @@ const arr2 = [4, 5, 5, 5, 6, 7, 8, 8, 10];
 const { arr1: _arr1, arr2: _arr2 } = minCountRemove(arr1, arr2);
 console.log(_arr1); // [1, 2, 3, 4, 4, 10]
 console.log(_arr2); // [5, 5, 5, 6, 7, 8, 8, 10]
+
+
+/**
+ * num以下の全ての素数の配列を返す
+ * @param {number} num 数値
+ * @returns {number[]} num以下の全ての素数の配列
+ */
+function generatePrimes(num) {
+  const primes = [];
+  const cache = {};
+
+  for (let i = 2; i <= num; i++) {
+    const isPrime = cache[i];
+    if (isPrime === false) continue;
+
+    primes.push(i);
+    cache[i] = true;
+    for (let j = i * 2; j <= num; j += i) {
+      cache[j] = false;
+    }
+  }
+
+  return primes;
+}
+
+console.log(generatePrimes(50));
