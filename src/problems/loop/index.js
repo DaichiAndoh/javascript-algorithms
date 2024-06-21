@@ -60,3 +60,35 @@ function getTaxicabNumbers(maxAnswerNum, matchAnswerNum) {
 }
 
 console.log(getTaxicabNumbers(2, 2));
+
+
+/**
+ * フェルマーの最終定理を証明する関数
+ * maxNum以下のx, yで【x**exponent + y**exponent = z**exponent】が成立するx, y, zの組の配列を返す
+ * @param {number} maxNum xとyの最大値
+ * @param {number} exponent 指数
+ * @returns {number[][]} 【x**exponent + y**exponent = z**exponent】が成立するx, y, zの組の配列
+ */
+function fermatLastTheorem(maxNum, exponent) {
+  const result = [];
+  if (exponent < 2) return result;
+
+  for (let x = 1; x <= maxNum; x++) {
+    for (let y = x + 1; y <= maxNum; y++) {
+      powSum = Math.pow(x, exponent) + Math.pow(y, exponent);
+
+      if (powSum > Number.MAX_SAFE_INTEGER) throw new Error();
+
+      const z = Math.pow(powSum, 1 / exponent);
+      if (!Number.isInteger(z)) continue;
+
+      const zPow = Math.pow(z, exponent);
+      if (zPow === powSum) result.push([x, y, z]);
+    }
+  }
+
+  return result;
+}
+
+console.log(fermatLastTheorem(10, 2));
+console.log(fermatLastTheorem(10, 3));
