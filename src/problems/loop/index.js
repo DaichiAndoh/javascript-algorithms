@@ -92,3 +92,43 @@ function fermatLastTheorem(maxNum, exponent) {
 
 console.log(fermatLastTheorem(10, 2));
 console.log(fermatLastTheorem(10, 3));
+
+
+/**
+ * シーザー暗号
+ * strの各文字をn分ずらした文字列を返す
+ * @param {string} str 文字列
+ * @param {ずらす} n 自然数
+ * @returns strの各文字をn分ずらした文字列
+ */
+function caesarCipher(str, n) {
+  let result = '';
+  const alphabetLen = 'Z'.charCodeAt(0) - 'A'.charCodeAt(0) + 1;
+  n = n % alphabetLen;
+
+  for (const char of str) {
+    if (char.charCodeAt(0) >= 'A'.charCodeAt(0) && char.charCodeAt(0) <= 'Z'.charCodeAt(0)) {
+      const charCode = char.charCodeAt(0);
+      const shifted =
+        charCode + n > 'Z'.charCodeAt(0) ?
+        charCode + n - alphabetLen :
+        charCode + n;
+      result += String.fromCharCode(shifted);
+    } else if (char.charCodeAt(0) >= 'a'.charCodeAt(0) && char.charCodeAt(0) <= 'z'.charCodeAt(0)) {
+      const charCode = char.charCodeAt(0);
+      const shifted =
+        charCode + n > 'z'.charCodeAt(0) ?
+        charCode + n - alphabetLen :
+        charCode + n;
+      result += String.fromCharCode(shifted);
+    } else {
+      result += char;
+    }
+  }
+
+  return result;
+}
+
+console.log(caesarCipher('abcde', 3)); // defgh
+console.log(caesarCipher('vwxyz', 5)); // abcde
+console.log(caesarCipher('Hello World!', 5)); // Mjqqt Btwqi!
