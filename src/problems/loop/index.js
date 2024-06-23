@@ -98,8 +98,8 @@ console.log(fermatLastTheorem(10, 3));
  * シーザー暗号
  * strの各文字をn分ずらした文字列を返す
  * @param {string} str 文字列
- * @param {ずらす} n 自然数
- * @returns strの各文字をn分ずらした文字列
+ * @param {number} n 自然数
+ * @returns {string} strの各文字をn分ずらした文字列
  */
 function caesarCipher(str, n) {
   let result = '';
@@ -132,3 +132,42 @@ function caesarCipher(str, n) {
 console.log(caesarCipher('abcde', 3)); // defgh
 console.log(caesarCipher('vwxyz', 5)); // abcde
 console.log(caesarCipher('Hello World!', 5)); // Mjqqt Btwqi!
+
+
+/**
+ * ヴィジュネル暗号
+ * strをkeywordから生成したkeyで暗号化した文字列を返す
+ * @param {string} str 
+ * @param {string} keyword 
+ * @returns {string} strをkeywordから生成したkeyで暗号化した文字列
+ */
+function vigenereCipher(str, keyword) {
+  function genKey(keyword) {
+    let key = keyword;
+    const diff = str.length - keyword.length;
+
+    for (let i = 0; i < diff; i++) {
+      key += keyword[i % keyword.length];
+    }
+
+    return key;
+  }
+
+  let result = '';
+  str = str.toUpperCase();
+  const key = genKey(keyword);
+  const alphabetLen = 'Z'.charCodeAt(0) - 'A'.charCodeAt(0) + 1;
+
+  for (let i = 0; i < str.length; i++) {
+    if (str.charCodeAt(i) >= 'A'.charCodeAt(0) && str.charCodeAt(0) <= 'Z'.charCodeAt(0)) {
+      const code = (str.charCodeAt(i) + key.charCodeAt(i)) % alphabetLen + 'A'.charCodeAt(0);
+      result += String.fromCharCode(code);
+    } else {
+      result += str[i];
+    }
+  }
+
+  return result;
+}
+
+console.log(vigenereCipher('HELLO WORLD', 'abc')); // NLTRV CVZRK
