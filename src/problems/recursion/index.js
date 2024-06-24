@@ -127,3 +127,21 @@ function getPhoneMnemoics(phoneNumber) {
 }
 
 console.log(getPhoneMnemoics('1-2-3'));
+
+
+/**
+ * discs枚のディスクをsrcからdestにsupportを用いて移動する手順を出力する
+ * @param {number} discs ディスク枚数
+ * @param {string} src ディスクの開始位置の棒
+ * @param {string} dest ディスクの終了位置の棒
+ * @param {string} support srcとdestではない残りの棒
+ */
+function towerOfHanoi(discs, src, dest, support) {
+  if (discs < 1) return;
+
+  towerOfHanoi(discs - 1, src, support, dest);
+  console.log(`move ${discs} from ${src} to ${dest}`);
+  towerOfHanoi(discs - 1, support, dest, src);
+}
+
+towerOfHanoi(3, 'A', 'C', 'B');
