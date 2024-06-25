@@ -176,7 +176,7 @@ console.log(vigenereCipher('HELLO WORLD', 'abc')); // NLTRV CVZRK
 /**
  * 深さがdepthのパスカルの三角形を成立させるラインの配列を返す
  * @param {number} depth トライングルの深さ
- * @returns パスカルの三角形を成立させるラインの配列
+ * @returns {number[]} パスカルの三角形を成立させるラインの配列
  */
 function generatePascalTriangle(depth) {
   const lines = [];
