@@ -171,3 +171,26 @@ function vigenereCipher(str, keyword) {
 }
 
 console.log(vigenereCipher('HELLO WORLD', 'abc')); // NLTRV CVZRK
+
+
+/**
+ * 深さがdepthのパスカルの三角形を成立させるラインの配列を返す
+ * @param {number} depth トライングルの深さ
+ * @returns パスカルの三角形を成立させるラインの配列
+ */
+function generatePascalTriangle(depth) {
+  const lines = [];
+  for (let i = 0; i < depth; i++) {
+    lines.push(new Array(i + 1).fill(1));
+  }
+
+  for (let i = 2; i < lines.length; i++) {
+    for (let j = 1; j < i; j++) {
+      lines[i][j] = lines[i - 1][j - 1] + lines[i - 1][j];
+    }
+  }
+
+  return lines;
+}
+
+console.log(generatePascalTriangle(5));
