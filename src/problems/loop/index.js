@@ -194,3 +194,39 @@ function generatePascalTriangle(depth) {
 }
 
 console.log(generatePascalTriangle(5));
+
+
+/**
+ * triangleをトップからボトムまで辿った時に通過する数値の最小合計値（最小パス）を返す
+ * @param {number[][]} triangle 三角形を示す数値配列の配列
+ * @returns {number} triangleをトップからボトムまで辿った時に通過する数値の最小合計値（最小パス）
+ */
+function getMinPathOfTriangle(triangle) {
+  const treeSum = [...triangle];
+
+  for (let i = 1; i < triangle.length; i++) {
+    const line = triangle[i];
+    const linePathSum = [];
+
+    for (let j = 0; j < line.length; j++) {
+      let sumValue = line[j];
+
+      if (j === 0) {
+        sumValue += treeSum[i - 1][0];
+      } else if (j === line.length - 1) {
+        sumValue += treeSum[i - 1][j - 1];
+      } else {
+        const minValue = Math.min(treeSum[i - 1][j - 1], treeSum[i - 1][j]);
+        sumValue += minValue;
+      }
+
+      linePathSum.push(sumValue);
+    }
+
+    treeSum[i] = linePathSum;
+  }
+
+  return Math.min(...treeSum[treeSum.length - 1]);
+}
+
+console.log(getMinPathOfTriangle([[1], [1, 2], [1, 2, 3]])); // 3
